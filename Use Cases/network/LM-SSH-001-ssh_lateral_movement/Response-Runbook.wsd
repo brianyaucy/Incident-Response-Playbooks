@@ -19,7 +19,18 @@ else (yes)
 endif
 
 if (Is the user's department makes sense?) then (no)
-  #red:Notify the Linux host's owner;
+  while (Confirmed by the Linux host's owner?) is (no)
+    #red:Notify the Linux host's owner;
+    if (Get the confirmation?) then (yes)
+      break
+    else (no)
+    endif
+  endwhile
+  if (Expected connection?) then (no)
+    #red:Declare security incident and
+    trigger Unauthorized Access playbook;
+  else (yes)
+  endif
 else (yes)
 endif
 
