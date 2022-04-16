@@ -20,8 +20,8 @@
 
 | Notation ||
 | --- | --- |
-| **AD** | Account Compromised Identification |
-| **AA** | Account Compromised Verification |
+| **AC-I** | Account Compromised Identification |
+| **AC-V** | Account Compromised Verification |
 | **AC** | Account Compromised Containment |
 | **RC** | Account Compromised Eradication |
 | **AR** | Account Compromised Recovery |
@@ -31,7 +31,38 @@
 
 ## Identification
 
-![Identification](images/ef947400158a6a34e3b0287e0880b941cd2febeeb93debd0963d7dff09eb2491.png)  
+![picture 8](images/3a43df3bd30927c30c91d53f44356191a8f5dfe70ca3eb779efd62eff7c6353a.png)  
+
+| **Step Code** | **Type** | **Step Name** | **Explanation** |
+| --- | --- | --- | --- |
+| **Identification** ||
+| **AC-I-001** | Input |Alerts / Notifications | Inputs of the identification workflow |
+| **AC-I-002** | Action | Identify Risk Factors | Common or Organization specific risk factors |
+| **AC-I-003** | Action | Data Collection | Data enrichment related to the information. Like Threat, File, Domain and IP |
+| **AC-I-004** | Action | Triage | Identify if this is a False Postive.  If true, determine the impact and scope, as well as the communication required. |
+| **AC-I-005** | Condition | False Positive? | Determine if this is a false positive |
+| **Verification** ||
+| **AC-V-001** | Action | Verify | Double check the data collected and rule out false positive |
+| **AC-V-002** | Action | List of affected credentials | Find out all of the affected credentials and accounts |
+| **AC-V-003** | Action | Level of Access / Privileges | For each account, find out the level of access and the privileges |
+| **AC-V-004** | Condition | Critical Incident? | Determine if this is a critical incident. If true, have to trigger the **Critical Playbook** in parallel |
+| **AC-V-005** | Condition | Domain Compromised? | Determine if there is a domain compromise |
+| **AC-V-006** | Action | Disable trust with infected domain | As a containment, disable the trust with the infected domain |
+| **AC-V-007** | Condition | Live threat actor? | Determine if there is any threat actor in the network live |
+| **AC-V-008** | Action | Monitor all systems closely | In case of a live actor we have to take coordonated efforts to cut ALL the actor's access at the same time |
+| **AC-V-009** | Condition | Do we have backups? | Determine if we have backups on the affected systems |
+| **AC-V-010** | Action | Ensure backups are protected | Since you will have to use the good backups to restore systems, we need to protect them well |
+| **AC-V-011** | Action | Log Analysis | Check the related logs to identify more surrounding information |
+| **AC-V-012** | Condition | Password reused? | Determine if there is any account reusing the same compromised accounts' password |
+| **AC-V-013** | Action | Update scope | Update the compromised accounts list |
+| **AC-V-014** | Condition | TOTP stored in password manager? | Check if the TOTP of the compromised accounts are in the password manager |
+| **AC-V-015** | Action | If the TOTP of the compromised account is stored in password manager, note it down in scope. |
+| **AC-V-016** | Condition | MFA compromised | Determine if the MFA is compromised |
+| **AC-V-017** | Action | If the MFA is compromised, add the MFA info to the account compromised list |
+| **AC-V-018** | Condition & Action | If identified data exfiltration, trigger the DLP playbook |
+
+
+
 
 ---
 

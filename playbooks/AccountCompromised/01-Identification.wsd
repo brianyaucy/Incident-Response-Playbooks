@@ -1,247 +1,328 @@
 @startuml "Account Compromised Playbook - Identification"
+header Verion: 1.1\nAuthor: Brian Yau
 
-title "Account Compromised Playbook\n-\nIdentification\n"
+title "Account Compromised Playbook\nIdentification\n"
 
 partition "Identification" {
 
 start
 
-:[AD1]\nAlerts / Notifications;
-note
-  Alerts
-    - Tickets
-    - SIEM
-    - AV / EDR Alerts
-    - Reports (DNS / Web Proxy / ...)
-  Notifications
-    - From users
-    - From recipients
-    - ISP
-    - 3rd party
-    - Mail provider
-    - Computer is slow / crash unexpectedly
-endnote
+  group [AC-I-001]
+    :Alerts / Notifications;
+    note
+      Alerts
+        - Tickets
+        - SIEM
+        - AV / EDR Alerts
+        - Reports (DNS / Web Proxy / ...)
 
-:[AD2]\nIdentify Risk Factors;
-note
-  Common
-    - Credential theft
-    - Malware delivery
-    - Criminal activities
+      Notifications
+        - From users
+        - From recipients
+        - ISP
+        - 3rd party
+        - Mail provider
+        - Computer is slow / crash unexpectedly
+    endnote
+  endgroup
+
+group [AC-I-002]
+  :Identify Risk Factors;
+  note
+    Common
+      - Credential theft
+      - Malware delivery
+      - Criminal activities
+        - Financial losses
+        - Blackmail / Ransom
+    Organization specific
+      - Reputation damage
       - Financial losses
-      - Blackmail / Ransom
-  Organization specific
-    - Reputation damage
-    - Financial losses
-      - Lost contract / renewal
-      - Lower bid to our clients
-      - Fines (regulation)
-endnote
+        - Lost contract / renewal
+        - Lower bid to our clients
+        - Fines (regulation)
+  endnote
+endgroup
 
-:[AD3]Data Collection;
-note
-  - Threat
-    - Bitcoin address
-    - Email
-  - File
-    - Hash
-    - Reputation
-    - Extention type
-    - Behavior
-  - Domain
-    - Reputation
-    - Registrar
-    - Owner
-    - DNS records
-    - Multi stage / Redirect
-    - Technogies
-      - Wordpress
-      - Joomla
-      - ... 
-  - IP
-    - Reputation
-    - vhosts
-endnote
+group [AC-I-003]
+  :Data Collection;
+  note
+    - Threat
+      - Bitcoin address
+      - Email
+    - File
+      - Hash
+      - Reputation
+      - Extention type
+      - Behavior
+    - Domain
+      - Reputation
+      - Registrar
+      - Owner
+      - DNS records
+      - Multi stage / Redirect
+      - Technogies
+        - Wordpress
+        - Joomla
+        - ... 
+    - IP
+      - Reputation
+      - vhosts
+  endnote
+endgroup
 
-:[AD4]Triage;
-note
-  - Determine impact
-    - Is the malware destroying things?
-    - Is the malware proliferating / infecting
-      other hosts?
-    - Financial impact?
-    - BSoD
-    - ...
-  - Determine Scope
-    - No. of hosts received the file
-    - No. of hosts that attempt to connect to the URLs
-    - No. of hosts with registry keys
-    - Other IOC
-  - Send Communication
-  - Determine if False Positive
-endnote
+group [AC-I-004]
+  :Triage;
+  note
+    1. Determine impact
+      - Is the malware destroying things?
+      - Is the malware proliferating / infecting
+        other hosts?
+      - Financial impact?
+      - BSoD
+      - ...
+    2. Determine Scope
+      - No. of hosts received the file
+      - No. of hosts that attempt to connect to the URLs
+      - No. of hosts with registry keys
+      - Other IOC
+    3. Send Communication
+    4. Determine if False Positive
+  endnote
+endgroup
 
-#pink:if ([AD5]\nFalse Positive?) then (yes)
-  :Document the findings;
-  :Close case;
-  end
-else (no)
-endif
+group [AC-I-005]
+  #pink:if (False Positive?) then (yes)
+    :Document the findings;
+    :Close case;
+    end
+  else (no)
+  endif
+endgroup
 
-:[AA1]\nVerify;
+group [AC-V-001]
+  :Verify;
+  note
+    - Double check previous data
+    - Rule out False Positive
+  endnote
+endgroup
 
-note
-  - Double check previous data
-  - Rule out False Positive
-endnote
+group [AC-V-002]
+  :List of affected credentials;
+  note
+    - Collect list of affected accounts
+  endnote
+endgroup
 
-:[AA2]\nList of affected credentials;
+group [AC-V-003]
+  :Level of Access / Privielges;
 
-note
-  - Collect list of affected accounts
-endnote
+  note
+    - Access to customers
+    - Access to internal
+    - What is the access level?
+      - Local admin
+      - Cloud admin
+      - Local user
+      - Domain user
+    - Account type
+      - User
+      - Service account
+      - API keys
+      - Other
+  endnote
+endgroup
 
-:[AA3]\nLevel of Access / Privielges;
+group [AC-V-004]
+  #pink:if (Critical incident?) then (yes)
+    group Critical Playbook
+      :Critical Playbook;
+      note
+        Trigger the **Critical Playbook**
+      endnote
+    endgroup
+  else (no)
+  endif
+endgroup
 
-note
-  - Access to customers
-  - Access to internal
-  - What is the access level?
-    - Local admin
-    - Cloud admin
-    - Local user
-    - Domain user
-  - Account type
-    - User
-    - Service account
-    - API keys
+group [AC-V-005]
+  #pink:if (Domain Compromised?) then (yes)
+    group [AC-V-006]
+      :Disable trust with infected domain;
+      note
+        The infected domain msut be 
+        cut off from any other environment
+      endnote
+    endgroup
+  else (no)
+  endif
+endgroup
+
+group [AC-V-007]
+  #pink:if (Live threat actor?) then (yes)
+    group [AC-V-008]
+      :Monitor all systems closely;
+      note
+        - In case of a live actor we have to 
+          take coordonated efforts to cut ALL 
+          the actor's access at the same time
+      endnote
+    endgroup
+  else (no)
+  endif
+endgroup
+
+group [AC-V-009]
+  #pink:if (Do we have backups?) then (yes)
+    group [AC-V-010]
+      :Ensure backups are protected;
+      note
+        - Disable future backups
+          - Disable backup interface
+          - Stop backup scheduling
+        - Make an offline copy of the backup
+      endnote
+    endgroup
+  else (no)
+  endif
+endgroup
+
+group [AC-V-011]
+  :Log Analysis;
+  note
+    - Failed login
+    - Successful login
+    - Lateral movement
     - Other
-endnote
-
-#pink:if ([AA4]\nCritical incident?) then (yes)
-  group Critical Playbook
-    :Critical Playbook;
-  endgroup
-else (no)
-
-endif
-
-#pink:if ([AA5]\nDomain Compromised?) then (yes)
-  :[AA6]\nDisable turst with infected domain;
-  note
-    - The infected domain msut be 
-      cut off from any other environment
   endnote
-else (no)
-endif
+endgroup
 
-#pink:if ([AA7]\nLive threat actor?) then (yes)
-  :[AA8]\nMonitor all systems closely;
-  note
-    - In case of a live actor we have to 
-      take coordonated  efforts to cut ALL 
-      the actor's access at the same time
-  endnote
-else (no)
-endif
-
-#pink:if ([AA9]\nDo We have backups?) then (yes)
-  :[AA10]\nEnsure backups are protected;
-  note
-    - Disable future backups
-      - Disalbe backup interface
-      - Stop backup scheduling
-    - Make an offline copy of the backup
-  endnote
-else (no)
-endif
-
-:[AA11]\nLog Analysis;
-note
-  - Failed login
-  - Successful login
-  - Lateral movement
-  - Other
-endnote
-
-#pink:if ([A12]\nPassword Reused?) then (yes)
-  :[AA13]\nUpdate scope;
-else (no)
-endif
-
-#pink:if([A14]\nTOTP stored in password manager?) then (yes)
-  :[AA15]\nUpdate scope;
-else (no)
-endif
-
-#pink:if ([A15]\nMFA compromised?) then (yes)
-  :[AA17]\nUpdate scope;
-else (no)
-endif
-
-#pink:if ([AA18]\nData exfiltration?) then (yes)
-  group "DLP playbook"
-    :DLP playbook;
-  endgroup
-else (no)
-endif
-
-#pink:if ([AA19]\nAll affected accounts and domain identified?) then (no)
-  :[AA20]\nUpdate scope;
-  note
-    Update lists of affected:
-      - Data
-      - Endpoints
-      - Company entities
-      - Clients
-  endnote
-
-  :[AA21]\nScope Validation;
-  note
-    - New signs of data encrypted
-    - Search customers environment
-    - Search endpoints for IOCs with EDR
-    - Search firewall/proxy/DNS logs for IOCs
-  endnote
-
-  :Go back to [AA1];
-  end
-else (yes)
-endif
-
-if ([AA22]\nDo we need external help?) then (yes)
-  if ([AA23]\nDo we need technical help?) then (yes)
-    :[AA24]\nContact IR professional services;
+group [AC-V-012]
+  #pink:if (Password Reused?) then (yes)
+    group [AC-V-013]
+      :Update scope;
+      note
+        Update the compromised accounts list
+      endnote
+    endgroup
   else (no)
   endif
+endgroup
 
-  if ([AA25]\nDo we need legal help?) then (yes)
-    :[AA26]\nContract Breach Coach;
+group [AC-V-014]
+  #pink:if(TOTP stored in password manager?) then (yes)
+    group [AC-V-015]
+      :Update scope;
+      note
+        If the TOTP of the compromised account is stored
+        in password manager, note it down in scope.
+      endnote
+    endgroup
   else (no)
   endif
-else (no)
-endif
+endgroup
 
-:[AA27]\nRoot Cause Analysis;
-note
-  - Phishing?
-  - Vishing?
-  - Vulnerability?
-    - RCE / XSS / LFI ...
-  - Remote Service
-    - Weak password
-    - Brute force
-    - Vulnerability
-  - Public facing services w/o MFA
-endnote
+group [AC-V-016]
+  #pink:if (MFA compromised?) then (yes)
+    group [AC-V-017]
+      :Update scope;
+      note
+        If compromised, add the MFA info to
+        the account compromised list
+      endnote
+    endgroup
+  else (no)
+  endif
+endgroup
 
-:[AA28]\nSend Communication;
-note
-  - Internal security teams
-  - Affected clients
-  - Any internal teams needs
-    for remediation or conselling
-endnote
+group [AC-V-018]
+  #pink:if (Data exfiltration?) then (yes)
+    group "DLP playbook"
+      :DLP playbook;
+      note
+        Trigger the DLP playbook
+      endnote
+    endgroup
+  else (no)
+  endif
+endgroup
+
+group [AC-V-019]
+  #pink:if (All affected accounts and domain identified?) then (no)
+    group [AC-V-020]
+      :Update scope;
+      note
+        Update lists of affected:
+          - Data
+          - Endpoints
+          - Company entities
+          - Clients
+      endnote
+    endgroup
+
+    group [AC-V-021]
+      :Scope Validation;
+      note
+        - New signs of data encrypted
+        - Search customers environment
+        - Search endpoints for IOCs with EDR
+        - Search firewall/proxy/DNS logs for IOCs
+      endnote
+      :Go back to [AC-I-001];
+      end
+    endgroup
+  else (yes)
+  endif
+endgroup
+
+group [AC-V-022]
+  #pink:if (Do we need external help?) then (yes)
+    group [AC-V-023]
+      #pink:if (Do we need technical help?) then (yes)
+        group [AC-V-024]
+          :Contact IR professional services;
+        endgroup
+      else (no)
+      endif
+    endgroup
+
+    group [AC-V-025]
+      #pink:if (Do we need legal help?) then (yes)
+        group [AC-V-026]
+          :Contact Breach Coach;
+        endgroup
+      else (no)
+      endif
+    endgroup
+  else (no)
+  endif
+endgroup
+
+group [AC-V-027]
+  :Root Cause Analysis;
+  note
+    - Phishing?
+    - Vishing?
+    - Vulnerability?
+      - RCE / XSS / LFI ...
+    - Remote Service
+      - Weak password
+      - Brute force
+      - Vulnerability
+    - Public facing services w/o MFA
+  endnote
+endgroup
+
+group [AC-V-028]
+  :Send Communication;
+  note
+    - Internal security teams
+    - Affected clients
+    - Any internal teams needs
+      for remediation or conselling
+  endnote
+endgroup
 
 }
 
