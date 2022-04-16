@@ -30,6 +30,13 @@
 - [ ] Medium
 - [ ] Low
 
+## Status
+
+- [ ] Experimental
+- [ ] Functional
+- [ ] Stable
+- [ ] Retired
+
 ## Strategy Abstract
 
 ## Technical Context

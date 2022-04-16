@@ -1,0 +1,15 @@
+{
+    "displayName": "SSH Lateral Movement by James",
+    "description": "Detect lateral movement attempts by monitoring for SSH connections from unexpected subnets. Author: James.",
+    "severity": "medium",
+    "enabled": true,
+    "query": "Syslog | where (DestinationPort == \"22\" and ((SourceIp != '10.10.10.0/24' or SourceIp != '10.10.20.0/24')))",
+    "queryFrequency": "PT30M",
+    "queryPeriod": "PT30M",
+    "triggerOperator": "GreaterThan",
+    "triggerThreshold": 0,
+    "suppressionDuration": "PT2H30M",
+    "suppressionEnabled": true,
+    "tactics": [],
+    "techniques": []
+}

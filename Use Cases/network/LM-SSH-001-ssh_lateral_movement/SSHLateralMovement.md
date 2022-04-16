@@ -1,4 +1,4 @@
-# SSH Lateral Movement
+# LM-SSH-001: SSH Lateral Movement
 
 ## Metadata
 
@@ -31,6 +31,13 @@ Detect lateral movement attempts by monitoring for SSH connections from unexpect
 - [ ] High
 - [x] Medium
 - [ ] Low
+
+## Status
+
+- [X] Experimental
+- [ ] Functional
+- [ ] Stable
+- [ ] Retired
 
 ## Strategy Abstract
 
