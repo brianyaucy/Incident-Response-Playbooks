@@ -25,6 +25,11 @@
 
 ## Priority
 
+- [ ] Highest
+- [ ] High
+- [ ] Medium
+- [ ] Low
+
 ## Strategy Abstract
 
 ## Technical Context

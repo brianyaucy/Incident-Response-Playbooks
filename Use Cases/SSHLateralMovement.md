@@ -27,7 +27,10 @@ Detect lateral movement attempts by monitoring for SSH connections from unexpect
 
 ## Priority
 
-- Medium
+- [ ] Highest
+- [ ] High
+- [x] Medium
+- [ ] Low
 
 ## Strategy Abstract
 
