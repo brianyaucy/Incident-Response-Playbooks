@@ -13,12 +13,12 @@
 
 ### Suspicious IAM Activities
 
-1. Detect IAM activities from uncommon locations
-2. Detect IAM User `ConsoleLogin` without MFA
-3. Detect IAM User `ConsoleLogin` from uncommon locations
-4. Detect sensitive IAM policy attachment (e.g. `AdministratorAccess`)
-5. Detect IAM User or Access Key Creation (`iam:CreateUser` / `iam:CreateLoginProfile` / `iam:UpdateLoginProfile` / `iam:CreateAccessKey`)
-6. Detect `RequestServiceQuotaIncrease` for potential impact
+1. (SIEM Use Case) Detect IAM activities from uncommon locations
+2. (SIEM Use Case) Detect IAM User `ConsoleLogin` without MFA
+3. (SIEM Use Case) Detect IAM User `ConsoleLogin` from uncommon locations
+4. (SIEM Use Case) Detect sensitive IAM policy attachment (e.g. `AdministratorAccess`)
+5. (SIEM Use Case) Detect IAM User or Access Key Creation (`iam:CreateUser` / `iam:CreateLoginProfile` / `iam:UpdateLoginProfile` / `iam:CreateAccessKey`)
+6. (SIEM Use Case) Detect `RequestServiceQuotaIncrease` for potential impact
 
 ## Reference
 
