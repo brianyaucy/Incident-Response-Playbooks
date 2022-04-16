@@ -1,0 +1,44 @@
+@startuml
+title: LM-SSH-001\nSSH Lateral Movement\nUse Case Handling Guideline\n
+
+start
+note
+  Alert triggered
+endnote
+
+:Identify the source IP;
+note
+  - Which user subnet?
+  - Which department?
+  - Check DHCP / VPN logs to determine the machine
+endnote
+
+if (Can you locate the related machine?) then (no)
+  :Escalate to Infra team for help;
+else (yes)
+endif
+
+if (Is the user's department makes sense?) then (no)
+  #red:Notify the Linux host's owner;
+else (yes)
+endif
+
+:Check the host activities;
+note
+  - Use EDR to query running processes
+  - Use endpoint logs to locate the related process
+endnote
+
+if (Is the process normal?) then (no)
+  #red:Notify the Linux host's owner;
+  #red:Declare security incident and trigger malware infection playbook;
+else (yes)
+endif
+
+:Document the findings in the ticket;
+#green:Close Ticket;
+
+end
+
+
+@enduml

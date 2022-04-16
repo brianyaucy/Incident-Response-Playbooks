@@ -68,3 +68,5 @@ Attackers may use stolen credentials from unexpected location to move laterally.
 - Confirm the user or process that initiated the connection
 - Verify if it is malicious or not
 
+![Runbook](images/b665a22177c27534f10cbfa8a1cdf4a210918a7cfb4444227be32ee9c9714f4a.png)  
+
