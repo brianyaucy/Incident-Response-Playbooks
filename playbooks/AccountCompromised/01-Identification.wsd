@@ -1,9 +1,93 @@
 @startuml "Account Compromised Playbook - Identification"
 
-title "Account Compromised Playbook\n-\Identification\n"
+title "Account Compromised Playbook\n-\nIdentification\n"
 
 partition "Identification" {
-:Detection;
+
+start
+
+:[AD1]\nAlerts / Notifications;
+note
+  Alerts
+    - Tickets
+    - SIEM
+    - AV / EDR Alerts
+    - Reports (DNS / Web Proxy / ...)
+  Notifications
+    - From users
+    - From recipients
+    - ISP
+    - 3rd party
+    - Mail provider
+    - Computer is slow / crash unexpectedly
+endnote
+
+:[AD2]\nIdentify Risk Factors;
+note
+  Common
+    - Credential theft
+    - Malware delivery
+    - Criminal activities
+      - Financial losses
+      - Blackmail / Ransom
+  Organization specific
+    - Reputation damage
+    - Financial losses
+      - Lost contract / renewal
+      - Lower bid to our clients
+      - Fines (regulation)
+endnote
+
+:[AD3]Data Collection;
+note
+  - Threat
+    - Bitcoin address
+    - Email
+  - File
+    - Hash
+    - Reputation
+    - Extention type
+    - Behavior
+  - Domain
+    - Reputation
+    - Registrar
+    - Owner
+    - DNS records
+    - Multi stage / Redirect
+    - Technogies
+      - Wordpress
+      - Joomla
+      - ... 
+  - IP
+    - Reputation
+    - vhosts
+endnote
+
+:[AD4]Triage;
+note
+  - Determine impact
+    - Is the malware destroying things?
+    - Is the malware proliferating / infecting
+      other hosts?
+    - Financial impact?
+    - BSoD
+    - ...
+  - Determine Scope
+    - No. of hosts received the file
+    - No. of hosts that attempt to connect to the URLs
+    - No. of hosts with registry keys
+    - Other IOC
+  - Send Communication
+  - Determine if False Positive
+endnote
+
+#pink:if ([AD5]\nFalse Positive?) then (yes)
+  :Document the findings;
+  :Close case;
+  end
+else (no)
+endif
+
 :[AA1]\nVerify;
 
 note
