@@ -1,0 +1,1 @@
+(index="linux" AND DestinationPort="22" AND  NOT ((SourceIp="10.10.10.0/24" OR SourceIp="10.10.20.0/24"))) | table source_host,timestamp,SourceIp,DestinationPort
