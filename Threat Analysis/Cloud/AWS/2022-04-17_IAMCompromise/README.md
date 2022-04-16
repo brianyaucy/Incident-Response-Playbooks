@@ -6,6 +6,13 @@
 
 ## Detection Opportunities
 
+### Exposed credentials
+
+1. Secret scanning
+2. (Active Defense) Inventory IAM Access Key, and actively scanning public repos for them
+
+### Suspicious IAM Activities
+
 1. Detect IAM activities from uncommon locations
 2. Detect IAM User `ConsoleLogin` without MFA
 3. Detect IAM User `ConsoleLogin` from uncommon locations
