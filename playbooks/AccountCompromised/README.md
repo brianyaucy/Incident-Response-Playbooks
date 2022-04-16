@@ -1,10 +1,31 @@
 # Account Compromised Playbook
 
 - [Account Compromised Playbook](#account-compromised-playbook)
+  - [Metadata](#metadata)
   - [Identification](#identification)
   - [Containment & Eradication](#containment--eradication)
   - [Recovery](#recovery)
   - [Lessons Learnt](#lessons-learnt)
+
+---
+
+## Metadata
+
+| Basic Information ||
+| --- | --- |
+| **Playbook Name** | Account Compromised Playbook |
+| **Short name** | AC |
+| **Last update** | 16 April 2022 |
+| **Version** | 1.0 |
+
+| Notation ||
+| --- | --- |
+| **AD** | Account Compromised Identification |
+| **AA** | Account Compromised Verification |
+| **AC** | Account Compromised Containment |
+| **RC** | Account Compromised Eradication |
+| **AR** | Account Compromised Recovery |
+| **AP** | Account Compromised Lessons Learnt |
 
 ---
 
@@ -28,6 +49,7 @@
 
 ## Lessons Learnt
 
-![Lessons Learnt](images/931bd311900569ea407584ecb417f1b5d1f2722c039c0798e801a536b58a7b30.png)  
+![Lessons Learnt](images/4af61e93122ceb007da531c90236028966c49da5e067abcce2d332e162bbe7ad.png)  
+
 
 ---

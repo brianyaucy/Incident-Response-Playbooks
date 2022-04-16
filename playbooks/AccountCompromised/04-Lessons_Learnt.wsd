@@ -1,6 +1,6 @@
 @startuml "Account Compromised Playbook - Lessons Learnt"
 
-title "Account Compromised Playbook\n-\Lessons Learnt\n"
+title "Account Compromised Playbook\n-\nLessons Learnt\n"
 
 partition "Recovery" {
 
