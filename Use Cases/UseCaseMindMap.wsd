@@ -2,7 +2,8 @@
 
 + Use Case Development
 
-++ Create a GitHub folder under /Use Cases/<Category>/<Use Case Name>
+**:Create a GitHub folder under 
+/Use Cases/<Category>/<Use Case Name>;
 
 +++ README.md
 ++++ Metadata
