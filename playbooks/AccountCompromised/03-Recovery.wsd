@@ -1,0 +1,63 @@
+@startuml "Account Compromised Playbook - Recovery"
+
+title "Account Compromised Playbook\n-\nRecovery\n"
+
+partition "Containment & Eradication" {
+
+}
+
+partition "Recovery" {
+  while (All affected endpoints identified?)
+    -> no;
+    :[AR1]\nUpdate Defenses;
+    note
+      - Lift containment
+      - Proxy
+      - Firewall
+      - Re-enable backup links
+    endnote
+    
+    :[AR2]\nChange all passwords;
+    note
+      - Change KRBTGT password
+      - Domain
+      - Local
+      - MFA
+      - VPN
+      - SSH keys
+      - API credentials
+      - ...
+    endnote
+
+    :[AR3]\nRemove;
+    note
+      - VPN
+      - Jumpbox
+      - VDI
+    endnote
+
+    :[AR4]\nRebuild Systems;
+    note
+      - Install OS from clean media
+      - Upgrade OS if possible
+    endnote
+
+    :[AR5]\nRestore data;
+    note
+      - From clean backup
+    endnote
+
+    :[AR6]\nAudit internal facing services;
+    note
+      Looking for any service that
+      does not require MFA
+    endnote
+    
+  endwhile
+}
+
+partition "Lessons Learnt" {
+    
+}
+
+@enduml

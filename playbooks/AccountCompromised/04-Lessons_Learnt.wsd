@@ -1,0 +1,74 @@
+@startuml "Account Compromised Playbook - Lessons Learnt"
+
+title "Account Compromised Playbook\n-\Lessons Learnt\n"
+
+partition "Recovery" {
+
+}
+
+partition "Lessons Learnt" {
+  :[AP1]\nIncident Review;
+  note
+    - What worked
+    - What didn't work
+  endnote
+
+  :[AP2]\nUpdate policies & procedures;
+  note
+    - Documentations
+      - Policies
+      - Playbooks
+      - Runbooks
+      - Procedures
+      - ...
+    - Detection rules
+      - SIEM
+      - AV / EDR
+      - ...
+  endnote
+
+  :[AP3]\nReview defensive posture;
+  note
+    - Schedule review of newly
+      introducted rules in 6 months
+    - Are the following still applicable
+      - AV / EDR custom rules
+      - IPS signatures
+      - ...
+  endnote
+
+  :[AP4]\nUpdate / Upgrade Defences;
+  note
+    - AV
+      - Signature
+      - Engine
+    - EDR
+      - Behavior of the malware
+    - AntiSpam / Anti-phishing
+  endnote
+
+  :[AP5]\nBuild new detections;
+  note
+    - SIEM rules
+    - Tickets
+  endnote
+
+  :[AP6]\nModify Base images;
+  note
+    - Review hardening process
+    - Include patch in OS images
+    - Upgrade apps
+    - Patching
+  endnote
+
+  if ([AP7]\nIncident caused by human?) then (yes)
+    :[AP8]\nUser Awareness Training;
+  endif
+
+  :[AP9]\nCalculate incident's cost;
+
+}
+
+end
+  
+@enduml

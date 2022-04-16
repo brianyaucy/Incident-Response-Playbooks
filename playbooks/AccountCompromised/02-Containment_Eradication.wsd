@@ -1,0 +1,82 @@
+@startuml "Account Compromised Playbook - Recovery"
+
+title "Account Compromised\n-\nContainment & Eradication\n"
+
+partition "Identification" {
+
+}
+
+partition "Containment / Eradication" {
+
+    while (All affected Endpoints Contained?)
+        -> no;
+
+        :[AC1]\nDisable Accounts;
+        note
+        - Domain
+        - Local
+        - MFA
+        endnote
+
+        :[AC2]\nReset Password;
+        note
+        - Domain
+        - Local
+        - MFA
+        - KRBTGT
+        - VPN
+        endnote
+
+        :[AC3]\nPowerdown non-encrypted systems;
+        note
+        - If possible, powerdown unencrypted
+            systems
+        - Do NOT powerdown encrypted systems 
+            as they might not restart
+        endnote
+
+        :[RC4]\nRestrict Privileges;
+        note
+        - Reduce the rights of the accounts
+            - Remove from admin groups
+            - Any rights that allow to take
+            over other accounts
+        endnote
+
+        :[RC5]\nRemoved Cached Credentials;
+        note
+        From local machine
+        endnote
+
+        :[RC6]\nContain Endpoint;
+        note
+        - Workstation
+        - Servers
+        - Network Devices
+        endnote
+
+        :[RC7]\nBlock Network Traffic;
+        note
+        - IP
+        - ISP
+        - GeoLocation
+        endnote
+
+        #pink:if ([RC8]\nAll affected Endpoints Contained) then (no)
+            #pink:if ([RC9]\nNew IOC discovered?) then (yes)
+                :Jump back to [AA1];
+                end
+            else (no)
+            :[RC10]\nUpdate Scope;
+            endif
+        else (yes)
+            break
+        endif
+    endwhile
+}
+
+partition "Recovery" {
+
+}
+
+@enduml

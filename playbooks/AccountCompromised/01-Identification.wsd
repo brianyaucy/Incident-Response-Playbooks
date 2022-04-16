@@ -1,0 +1,168 @@
+@startuml "Account Compromised Playbook - Identification"
+
+title "Account Compromised Playbook\n-\Identification\n"
+
+partition "Identification" {
+:Detection;
+:[AA1]\nVerify;
+
+note
+  - Double check previous data
+  - Rule out False Positive
+endnote
+
+:[AA2]\nList of affected credentials;
+
+note
+  - Collect list of affected accounts
+endnote
+
+:[AA3]\nLevel of Access / Privielges;
+
+note
+  - Access to customers
+  - Access to internal
+  - What is the access level?
+    - Local admin
+    - Cloud admin
+    - Local user
+    - Domain user
+  - Account type
+    - User
+    - Service account
+    - API keys
+    - Other
+endnote
+
+#pink:if ([AA4]\nCritical incident?) then (yes)
+  group Critical Playbook
+    :Critical Playbook;
+  endgroup
+else (no)
+
+endif
+
+#pink:if ([AA5]\nDomain Compromised?) then (yes)
+  :[AA6]\nDisable turst with infected domain;
+  note
+    - The infected domain msut be 
+      cut off from any other environment
+  endnote
+else (no)
+endif
+
+#pink:if ([AA7]\nLive threat actor?) then (yes)
+  :[AA8]\nMonitor all systems closely;
+  note
+    - In case of a live actor we have to 
+      take coordonated  efforts to cut ALL 
+      the actor's access at the same time
+  endnote
+else (no)
+endif
+
+#pink:if ([AA9]\nDo We have backups?) then (yes)
+  :[AA10]\nEnsure backups are protected;
+  note
+    - Disable future backups
+      - Disalbe backup interface
+      - Stop backup scheduling
+    - Make an offline copy of the backup
+  endnote
+else (no)
+endif
+
+:[AA11]\nLog Analysis;
+note
+  - Failed login
+  - Successful login
+  - Lateral movement
+  - Other
+endnote
+
+#pink:if ([A12]\nPassword Reused?) then (yes)
+  :[AA13]\nUpdate scope;
+else (no)
+endif
+
+#pink:if([A14]\nTOTP stored in password manager?) then (yes)
+  :[AA15]\nUpdate scope;
+else (no)
+endif
+
+#pink:if ([A15]\nMFA compromised?) then (yes)
+  :[AA17]\nUpdate scope;
+else (no)
+endif
+
+#pink:if ([AA18]\nData exfiltration?) then (yes)
+  group "DLP playbook"
+    :DLP playbook;
+  endgroup
+else (no)
+endif
+
+#pink:if ([AA19]\nAll affected accounts and domain identified?) then (no)
+  :[AA20]\nUpdate scope;
+  note
+    Update lists of affected:
+      - Data
+      - Endpoints
+      - Company entities
+      - Clients
+  endnote
+
+  :[AA21]\nScope Validation;
+  note
+    - New signs of data encrypted
+    - Search customers environment
+    - Search endpoints for IOCs with EDR
+    - Search firewall/proxy/DNS logs for IOCs
+  endnote
+
+  :Go back to [AA1];
+  end
+else (yes)
+endif
+
+if ([AA22]\nDo we need external help?) then (yes)
+  if ([AA23]\nDo we need technical help?) then (yes)
+    :[AA24]\nContact IR professional services;
+  else (no)
+  endif
+
+  if ([AA25]\nDo we need legal help?) then (yes)
+    :[AA26]\nContract Breach Coach;
+  else (no)
+  endif
+else (no)
+endif
+
+:[AA27]\nRoot Cause Analysis;
+note
+  - Phishing?
+  - Vishing?
+  - Vulnerability?
+    - RCE / XSS / LFI ...
+  - Remote Service
+    - Weak password
+    - Brute force
+    - Vulnerability
+  - Public facing services w/o MFA
+endnote
+
+:[AA28]\nSend Communication;
+note
+  - Internal security teams
+  - Affected clients
+  - Any internal teams needs
+    for remediation or conselling
+endnote
+
+}
+
+partition "Containment & Eradication" {
+
+}
+
+@enduml
