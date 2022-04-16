@@ -1,0 +1,23 @@
+@startuml
+actor 		Attacker #red
+database	"Public GitHub Repo"
+entity		"Victim AWS"
+entity		"Compromised IAM User"
+
+autonumber
+Attacker -> "Public GitHub Repo": Scan for secrets
+"Public GitHub Repo" -> Attacker: Found AWS IAM credentials
+Attacker -> Attacker: Load the IAM credentials \nin AWS CLI
+Attacker -> "Victim AWS": (Initial Access: Valid Accounts) sts:GetCallerIdentity
+"Victim AWS" -> Attacker: Proved valid account
+Attacker -> "Victim AWS": (Discovery: Account Discovery) iam:ListUsers
+"Victim AWS" -> Attacker: Return list of valid users
+Attacker -> "Victim AWS": (Persistence: Account Manipulation) iam:CreateLoginProfile
+"Victim AWS" -> "Compromised IAM User": Grant GUI access
+Attacker -> "Victim AWS": (Persistence: Create Account) iam:CreateAccessKey
+"Victim AWS" -> "Compromised IAM User": Created API Access Key
+"Victim AWS" -> Attacker: Return IAM Credential (API Key + Secret Access Key)
+Attacker -> "Victim AWS": (Privilege Escalation) iam:AttachUserPolicy
+"Victim AWS" -> "Compromised IAM User": Attached AdministratorAccess policy
+Attacker -> "Victim AWS": (Initial Access: Valid Accounts) Login AWS Console
+@enduml
