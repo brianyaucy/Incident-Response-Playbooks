@@ -56,13 +56,19 @@
 | **AC-V-012** | Condition | Password reused? | Determine if there is any account reusing the same compromised accounts' password |
 | **AC-V-013** | Action | Update scope | Update the compromised accounts list |
 | **AC-V-014** | Condition | TOTP stored in password manager? | Check if the TOTP of the compromised accounts are in the password manager |
-| **AC-V-015** | Action | If the TOTP of the compromised account is stored in password manager, note it down in scope. |
+| **AC-V-015** | Action | Update scope | If the TOTP of the compromised account is stored in password manager, note it down in scope. |
 | **AC-V-016** | Condition | MFA compromised | Determine if the MFA is compromised |
-| **AC-V-017** | Action | If the MFA is compromised, add the MFA info to the account compromised list |
-| **AC-V-018** | Condition & Action | If identified data exfiltration, trigger the DLP playbook |
-
-
-
+| **AC-V-017** | Action | Update scope | If the MFA is compromised, add the MFA info to the account compromised list |
+| **AC-V-018** | Condition & Action | If identified data exfiltration, trigger the DLP playbook | **AC-V-019** | Condition | All affected accounts and domain identified? | Determine if all affected accounts and domains are identified |
+| **AC-V-020** | Action | Update Scope | Update lists of affected data / endpoints / entities / clients |
+| **AC-V-021** | Action | Scope validation | Add additional info into scoping |
+| **AC-V-022** | Condition | Do we need external help? | Determine if extra help is needed |
+| **AC-V-023** | Condition | (Do we need technical help? | Determine if extra help on technical is needed |
+| **AC-V-024** | Action | Contact IR professional services | / |
+| **AC-V-025** | Condition | Do we need legal help? | Determine if legal help is requried |
+| **AC-V-026** | Action | Contact Breach Coach | / |
+| **AC-V-027** | Action | Root Cause Analysis | Determine the initial compromise cause |
+| **AC-V-028** | Action | Send Communication | Formulation of IR team, notifications, etc. |
 
 ---
 
