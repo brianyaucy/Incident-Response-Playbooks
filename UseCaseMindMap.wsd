@@ -1,0 +1,26 @@
+@startmindmap
+
++ Use Case Development
+
+++ Create a GitHub folder under /Use Cases/<Category>/<Use Case Name>
+
++++ README.md
+++++ Metadata
+++++ Goal
+++++ Category
+++++ Priority
+++++ Status
+++++ Stategy Abstract
+++++ Technical Context
+++++ Blind spots & Assumptions
+++++ False Positives
+++++ Validation
+++++ Response / Runbook
+
++++ SIGMA-rule.yml
+++++ Product-specific rule
+
++++ Reponse-Runbook.wsd
+
+
+@endmindmap
